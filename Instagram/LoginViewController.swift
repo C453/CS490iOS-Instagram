@@ -16,8 +16,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func signUpBtnPressed(_ sender: Any) {
@@ -40,9 +38,11 @@ class LoginViewController: UIViewController {
         
         PFUser.logInWithUsername(inBackground: username, password: password) { (user, error) in
             if user != nil {
+                UserDefaults.standard.set(username, forKey: "username")
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             } else {
                 print("Error \(error?.localizedDescription)")
+                
             }
         }
     }
